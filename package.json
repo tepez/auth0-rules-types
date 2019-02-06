@@ -1,6 +1,6 @@
 {
   "name": "@tepez/auth0-rules-types",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Typescript types for the auth0 rule runtime environment",
   "scripts": {
     "update": "npx gulp build && npx np --no-publish --no-yarn",
