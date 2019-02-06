@@ -1,0 +1,9 @@
+{
+  "extends": "./node_modules/@tepez/typescript-common/tsconfig-node",
+  "compilerOptions": {
+    // Send the JS files to the _dist directory since we're only interested in Types here
+    "outDir": "_dist",
+    "declaration": true,
+    "declarationDir": "dist"
+  }
+}

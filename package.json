@@ -1,0 +1,32 @@
+{
+  "name": "@tepez/auth0-rules-types",
+  "version": "0.0.0",
+  "description": "Typescript types for the auth0 rule runtime environment",
+  "scripts": {
+    "update": "npx gulp build && npx np --no-publish --no-yarn",
+    "build": "npx gulp build",
+    "test": "npx gulp build-unit-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tepez/auth0-rules-types.git"
+  },
+  "author": "Tom Yam <tomyam@tepez.co.il>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tepez/auth0-rules-types/issues"
+  },
+  "homepage": "https://github.com/tepez/auth0-rules-types#readme",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@tepez/typescript-build-gulp-tasks": "^4.0.2",
+    "@tepez/typescript-common": "^0.2.0",
+    "@types/jasmine": "^2.8.16",
+    "gulp": "^3.9.1",
+    "np": "^4.0.2"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@types/node": "^8.10.39"
+  }
+}
