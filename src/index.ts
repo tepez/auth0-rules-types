@@ -1,3 +1,6 @@
+import { User } from 'auth0'
+
+
 declare global {
     export interface IAuth0RuleConfiguration {
         /**
@@ -241,7 +244,7 @@ export interface IAuth0RuleCallback {
     (result: Error | string): void
 
     (result: null,
-     user: IAuth0RuleUser,
+     user: IAuth0RuleUser | User,
      context: IAuth0RuleContext): void
 }
 

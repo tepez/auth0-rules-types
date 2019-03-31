@@ -25,7 +25,9 @@
     "gulp": "^3.9.1",
     "np": "^4.0.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/auth0": "^2.9.10"
+  },
   "peerDependencies": {
     "@types/node": "^8.10.39"
   }
