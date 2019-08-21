@@ -44,7 +44,7 @@ declare global {
     }
 }
 
-export interface IAuth0RuleUser {
+export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
     // This does not appear on the https://auth0.com/docs/user-profile/user-profile-structure page
     locale?: string
 
@@ -53,7 +53,7 @@ export interface IAuth0RuleUser {
     // https://github.com/auth0/docs/blob/a5c07513dc15818e3162098a5d87b25c795f11e3/articles/user-profile/user-profile-structure.md
 
     // the custom fields storing information about a user. These attributes contain information that influences the user's access;
-    app_metadata?: any
+    app_metadata?: AppMetadataType
 
     //the `true/false` value indicating if the user has been blocked;
     blocked?: boolean
@@ -114,7 +114,7 @@ export interface IAuth0RuleUser {
     user_id: string
 
     //the custom fields storing information about a user. These attributes should contain information about the user that does not impact what they can or cannot access (such as work and home addresses);
-    user_metadata?: any
+    user_metadata?: UserMetadataType
 
     //(unique): the user's username.
     username: string
@@ -240,16 +240,16 @@ export interface IAuth0RuleContext {
     }
 }
 
-export interface IAuth0RuleCallback {
+export interface IAuth0RuleCallback<AppMetadataType, UserMetadataType> {
     (result: Error | string): void
 
     (result: null,
-     user: IAuth0RuleUser | User,
+     user: IAuth0RuleUser<AppMetadataType, UserMetadataType> | User,
      context: IAuth0RuleContext): void
 }
 
-export interface IAuthRuleFunction {
-    (user: IAuth0RuleUser,
+export interface IAuthRuleFunction<AppMetadataType, UserMetadataType> {
+    (user: IAuth0RuleUser<AppMetadataType, UserMetadataType>,
      context: IAuth0RuleContext,
-     callback: IAuth0RuleCallback): void
+     callback: IAuth0RuleCallback<AppMetadataType, UserMetadataType>): void
 }
