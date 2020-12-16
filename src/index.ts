@@ -213,6 +213,22 @@ export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
     username: string
 }
 
+export const enum MFAProvider {
+    Any = 'any',
+
+    /**
+     * @deprecated The guardian and google-authenticator options are legacy settings that are kept for backwards compatibility reasons, and should not be used moving forward. We recommend using any. The 'google-authenticator' option does not let users enroll a recovery code.
+     */
+    Guardian = 'guardian',
+
+    /**
+     * @deprecated The guardian and google-authenticator options are legacy settings that are kept for backwards compatibility reasons, and should not be used moving forward. We recommend using any. The 'google-authenticator' option does not let users enroll a recovery code.
+     */
+    GoogleAuthenticator = 'google-authenticator',
+
+    Duo = 'duo',
+}
+
 
 /*
  Source:
@@ -350,8 +366,20 @@ export interface IAuth0RuleContext {
 
     /**
      * An object representing the multifactor settings used in implementing contextual MFA.
+     * https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/mfa/guides/customize-mfa-universal-login.md
      */
-    multifactor: Record<string, any>
+    multifactor: {
+        /**
+         * The provider setting is a way to specify whether to force MFA, and which factor to you use. The behavior is different depending if you use the Classic or the New Universal Login experience:
+         * https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/mfa/guides/customize-mfa-universal-login.md#provider-setting
+         */
+        provider: MFAProvider
+
+        /**
+         * By setting allowRememberBrowser: false, the user will always be prompted for MFA when they login. This prevents the browser cookie from saving the credentials and helps make logins more secure, especially from untrusted machines.
+         */
+        allowRememberBrowser?: boolean
+    },
 
     /**
      * The object used to implement the redirection of a user from a rule.
@@ -491,6 +519,7 @@ export interface IAuth0RuleContext {
         roles: string[]
     }
 }
+
 
 export interface IAuth0RuleCallback<AppMetadataType, UserMetadataType> {
     (result: Error | string): void
