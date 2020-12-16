@@ -21,23 +21,23 @@ declare global {
     }
 
 
-    /*
+    /**
      It seems the auth0 variable contains a limited instance of an older version of node-auth0
      so we can't use types/auth0 here
      https://auth0.com/docs/rules/current/management-api
-    */
+     */
     const auth0: {
-        /*
+        /**
          The access_token for the Management API which is available through auth0.accessToken
          is limited to the read:users and update:users scopes
          https://auth0.com/docs/rules/current/management-api
-        */
+         */
         accessToken: string
         domain: string
 
-        /*
+        /**
          Found no official documentation for this property, but it appears in many of the sample rules
-        */
+         */
         baseUrl: string
 
         users: {
@@ -51,11 +51,11 @@ declare global {
 }
 
 
-/*
+/**
  Source:
  https://auth0.com/docs/user-profile/user-profile-structure
  https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/references/user-object.md
-*/
+ */
 export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
     /**
      * @deprecated doesn't appear on the docs
@@ -86,61 +86,61 @@ export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
      */
     logins_count: number
 
-    /*
-    the custom fields storing information about a user. These attributes contain information that influences the user's access;
-    */
+    /**
+     the custom fields storing information about a user. These attributes contain information that influences the user's access;
+     */
     app_metadata?: AppMetadataType
 
-    /*
-    the timestamp of when the user profile was first created
-    */
+    /**
+     the timestamp of when the user profile was first created
+     */
     created_at: Date
 
-    /*
-    (unique): the user's email address
-    */
+    /**
+     (unique): the user's email address
+     */
     email: string
 
-    /*
-    the `true/false` value indicating if the user has verified their email address
-    */
+    /**
+     the `true/false` value indicating if the user has verified their email address
+     */
     email_verified: boolean
 
-    /*
+    /**
      the user's last name.
-    */
+     */
     family_name: string
 
-    /*
-    https://auth0.com/docs/user-profile/normalized/auth0
-    the user's first name.
-    */
+    /**
+     https://auth0.com/docs/user-profile/normalized/auth0
+     the user's first name.
+     */
     given_name: string
 
-    /*
-    the array of objects with information about the user's identities:
+    /**
+     the array of objects with information about the user's identities:
 
-    Contains info retrieved from the identity provider with which the user originally authenticates. Users may also link their profile to multiple identity providers; those identities will then also appear in this array. The contents of an individual identity provider object varies by provider, but it will typically include the following:
-    In some cases, it will also include an API Access Token to be used with the provider.
-    https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/_includes/_user-prop-identities.md
-    */
+     Contains info retrieved from the identity provider with which the user originally authenticates. Users may also link their profile to multiple identity providers; those identities will then also appear in this array. The contents of an individual identity provider object varies by provider, but it will typically include the following:
+     In some cases, it will also include an API Access Token to be used with the provider.
+     https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/_includes/_user-prop-identities.md
+     */
     identities: {
-        /*
+        /**
          the name of the connection used to authenticate the user;
-        */
+         */
         connection: string
-        /*
+        /**
          the `true/false` value indicating if the connection is a social one or not;
-        */
+         */
         isSocial: boolean
-        /*
+        /**
          the entity that is authenticating the user (such as Facebook, Twitter, and so on);
-        */
+         */
         provider: string
 
-        /*
+        /**
          the user's unique identifier for this connection/provider.
-        */
+         */
         user_id: string
 
         /**
@@ -154,18 +154,18 @@ export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
      */
     last_password_reset: Date
 
-    /*
-    the list of multifactor providers in which the user is enrolled;
-    */
+    /**
+     the list of multifactor providers in which the user is enrolled;
+     */
     multifactor: string[]
-    /*
-    the user's name;
-    */
+    /**
+     the user's name;
+     */
     name: string
 
-    /*
-    the user's nickname;
-    */
+    /**
+     the user's nickname;
+     */
     nickname: string
 
 
@@ -175,41 +175,41 @@ export interface IAuth0RuleUser<AppMetadataType, UserMetadataType> {
      */
     permissions: string
 
-    /*
-    the user's phone number;
-*/
+    /**
+     the user's phone number;
+     */
     phone_number: string
 
-    /*
-    the `true/false` value indicating whether the user's phone number has been verified (only valid for users with SMS connections);
-    */
+    /**
+     the `true/false` value indicating whether the user's phone number has been verified (only valid for users with SMS connections);
+     */
     phone_verified: boolean
 
-    /*
-    the user's profile picture, [click here to learn more about the picture field](/user-profile/user-picture);
-*/
+    /**
+     the user's profile picture, [click here to learn more about the picture field](/user-profile/user-picture);
+     */
     picture: string
 
 
-    /*
-    the timestamp of when the user's profile was last updated/modified;
-    */
+    /**
+     the timestamp of when the user's profile was last updated/modified;
+     */
     updated_at: Date
 
-    /*
-(unique): the user's unique identifier;
-*/
+    /**
+     (unique): the user's unique identifier;
+     */
     user_id: string
 
-    /*
-    the custom fields storing information about a user. These attributes should contain information about the user that does not impact what they can or cannot access (such as work and home addresses);
-    */
+    /**
+     the custom fields storing information about a user. These attributes should contain information about the user that does not impact what they can or cannot access (such as work and home addresses);
+     */
     user_metadata?: UserMetadataType
 
 
-    /*
-    (unique): the user's username.
-    */
+    /**
+     (unique): the user's username.
+     */
     username: string
 }
 
@@ -230,30 +230,70 @@ export const enum MFAProvider {
 }
 
 
-/*
+export const enum AuthenticaionMethodName {
+    /** a social or enterprise connection was used to authenticate the user */
+    Federated = 'federated',
+    /** a database connection was used to authenticate the user */
+    Pwd = 'pwd',
+    /** a Passwordless SMS connection was used to authenticate the user */
+    Sms = 'sms',
+    /** a Passwordless Email connection was used to authenticate the user */
+    Email = 'email',
+    /** the user completed a multi-factor authentication */
+    Mfa = 'mfa'
+}
+
+export const enum Protocol {
+    /** most used, web based login */
+    OidcBasicProfile = 'oidc-basic-profile',
+    /** used on mobile devices and single page apps */
+    OidcImplicitProfile = 'oidc-implicit-profile',
+    /** transaction using the Device Authorization Flow */
+    Oauth2DeviceCode = 'oauth2-device-code',
+    /** user/password login typically used on database connections */
+    Oauth2ResourceOwner = 'oauth2-resource-owner',
+    /** login using a bearer JWT signed with user's private key */
+    Oauth2ResourceOwnerJwtBearer = 'oauth2-resource-owner-jwt-bearer',
+    /** login using the password exchange */
+    Oauth2Password = 'oauth2-password',
+    /** refreshing a token using the Refresh Token exchange */
+    Oauth2RefreshToken = 'oauth2-refresh-token',
+    /** SAML protocol used on SaaS apps */
+    Samlp = 'samlp',
+    /** WS-Federation used on Microsoft products like Office365 */
+    Wsfed = 'wsfed',
+    /** WS-trust user/password login used on CRM and Office365 */
+    WstrustUsernamemixed = 'wstrust-usernamemixed',
+    /** when calling the Delegation endpoint */
+    Delegation = 'delegation',
+    /** when a redirect rule is resumed */
+    RedirectCallback = 'redirect-callback'
+}
+
+/**
  Source:
  https://auth0.com/docs/rules/context-object
  https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/references/context-object.md
-*/
+ */
 export interface IAuth0RuleContext {
     /**
      * A string containing the name of the tenant
      */
     tenant: string
 
-    /*
+    /**
      the client id of the application the user is logging in to.
-    */
+     */
     clientID: string
 
-    /*
+    /**
      the name of the application (as defined on the dashboard).
-    */
+     */
     clientName: string
 
-    /*
+    /**
      is an object, whose keys and values are strings, for holding other client properties.
-    */
+     */
     clientMetadata: Record<string, string>
 
     /**
@@ -261,14 +301,14 @@ export interface IAuth0RuleContext {
      */
     connectionID: string
 
-    /*
+    /**
      the name of the connection used to authenticate the user (such as: twitter or some-google-apps-domain)
-    */
+     */
     connection: string
 
-    /*
+    /**
      the type of connection. For social connection connectionStrategy === connection. For enterprise connections, the strategy will be waad (Windows Azure AD), ad (Active Directory/LDAP), auth0 (database connections), and so on.
-    */
+     */
     connectionStrategy: string
 
     /**
@@ -291,54 +331,42 @@ export interface IAuth0RuleContext {
      */
     connectionMetadata: Record<string, string>
 
-    /*
-    an object that controls the behavior of the SAML and WS-Fed endpoints. Useful for advanced claims mapping and token enrichment (only available for samlp and wsfed protocol).
-    */
+    /**
+     an object that controls the behavior of the SAML and WS-Fed endpoints. Useful for advanced claims mapping and token enrichment (only available for samlp and wsfed protocol).
+     */
     samlConfiguration: {}
 
-    /*
+    /**
      the authentication protocol.
      https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/_includes/_context-prop-protocol.md
-    */
-    protocol:
-        | 'oidc-basic-profile' /* most used, web based login */
-        | 'oidc-implicit-profile' /* used on mobile devices and single page apps */
-        | 'oauth2-device-code' /* transaction using the Device Authorization Flow */
-        | 'oauth2-resource-owner' /* user/password login typically used on database connections */
-        | 'oauth2-resource-owner-jwt-bearer' /* login using a bearer JWT signed with user's private key */
-        | 'oauth2-password' /* login using the password exchange */
-        | 'oauth2-refresh-token' /* refreshing a token using the Refresh Token exchange */
-        | 'samlp' /* SAML protocol used on SaaS apps */
-        | 'wsfed' /* WS-Federation used on Microsoft products like Office365 */
-        | 'wstrust-usernamemixed' /* WS-trust user/password login used on CRM and Office365 */
-        | 'delegation' /* when calling the Delegation endpoint */
-        | 'redirect-callback' /* when a redirect rule is resumed */
+     */
+    protocol: Protocol
 
-    /*
+    /**
      An object containing specific user stats, like stats.loginsCount. Note that any of the counter variables returned as part of the stats object do not increase during silent authentication (as when prompt=none). There are also scenarios where the counter variables might increase yet a rule or set of rules do not execute, as in the case of a successful cross-origin authentication followed by a failed token request.
-    */
+     */
     stats: {
         loginsCount: number
     } & Record<string, any>
 
-    /*
+    /**
      this object will contain information about the SSO transaction (if available)
      https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/_includes/_context-prop-sso.md
-    */
+     */
     sso: {
-        /*
+        /**
          when a user signs in with SSO to an application where the Use Auth0 instead of the IdP to do Single Sign On setting is enabled.
-        */
+         */
         with_auth0: boolean
 
-        /*
+        /**
          an SSO login for a user that logged in through a database connection.
-        */
+         */
         with_dbconn: boolean
 
-        /*
+        /**
          client IDs using SSO.
-        */
+         */
         current_clients: string[]
     }
 
@@ -354,9 +382,9 @@ export interface IAuth0RuleContext {
         scope: string[]
     } & Record<string, any>
 
-    /*
+    /**
      An object representing the options defined on the ID Token. Used to add custom namespaced claims to the ID Token. Custom claims will be included in the ID Token after all rules have run.
-    */
+     */
     idToken: Record<string, any>
 
     /**
@@ -389,9 +417,9 @@ export interface IAuth0RuleContext {
         url: string
     }
 
-    /*
+    /**
      An internal identification for the authentication session. Value is kept only if prompt=none is used in the authorization request. Note that the session ID can change after rule execution on other flows, so the value available in context.sessionID might not match the new session ID that the user will receive. This makes this value only meaningful when prompt=none is used.
-    */
+     */
     sessionID: string
 
     /**
@@ -399,75 +427,75 @@ export interface IAuth0RuleContext {
      * https://github.com/auth0/docs/blob/6250e6f288e5072f783f4fe646daabeaf7cb67ba/articles/rules/_includes/_context-prop-request.md
      */
     request: {
-        /*
+        /**
          the user-agent of the client that is trying to log in.
-        */
+         */
         userAgent: string
 
-        /*
+        /**
          the originating IP address of the user trying to log in.
-        */
+         */
         ip: string
 
-        /*
+        /**
          the hostname that is being used for the authentication flow.
-        */
+         */
         hostname: string
 
-        /*
+        /**
          an object containing the querystring properties of the login transaction sent by the application.
-        */
+         */
         query: {
             [key: string]: any
         }
 
-        /*
+        /**
          the body of the POST request on login transactions used on oauth2-resource-owner, oauth2-resource-owner-jwt-bearer or wstrust-usernamemixed protocols.
-        */
+         */
         body: any
 
-        /*
+        /**
          an object containing geographic IP information. It has the following properties:
-        */
+         */
         geoip: {
-            /*
+            /**
              a two-character code for the country associated with the IP address
-            */
+             */
             country_code: string
 
-            /*
+            /**
              a three-character code for the country associated with the IP address
-            */
+             */
             country_code3: string
 
-            /*
+            /**
              the country name associated with the IP address
-            */
+             */
             country_name: string
 
-            /*
+            /**
              the city or town name associated with the IP address
-            */
+             */
             city_name: string
 
-            /*
+            /**
              the latitude associated with the IP address.
-            */
+             */
             latitude: number
 
-            /*
+            /**
              the longitude associated with the IP address.
-            */
+             */
             longitude: number
 
-            /*
+            /**
              the timezone associated with the IP address.
-            */
+             */
             time_zone: string
 
-            /*
+            /**
              a two-character code for the continent associated with the IP address.
-            */
+             */
             continent_code: string
         }
     }
@@ -489,18 +517,7 @@ export interface IAuth0RuleContext {
             /**
              * a string representing the name of the authentication method that has been completed. It can be one of the following values (additional values may be supported in the future)
              */
-            name:
-            /* a social or enterprise connection was used to authenticate the user */
-                | 'federated'
-                /* a database connection was used to authenticate the user */
-                | 'pwd'
-                /* a Passwordless SMS connection was used to authenticate the user */
-                | 'sms'
-                /* a Passwordless Email connection was used to authenticate the user */
-                | 'email'
-                /* the user completed a multi-factor authentication */
-                | 'mfa'
-
+            name: AuthenticaionMethodName
             /**
              * an integer indicating the time in seconds at which the authentication method took place in Unix Epoch time
              */
