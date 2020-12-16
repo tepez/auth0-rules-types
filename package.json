@@ -19,16 +19,16 @@
   "homepage": "https://github.com/tepez/auth0-rules-types#readme",
   "types": "dist/index.d.ts",
   "devDependencies": {
-    "@tepez/typescript-build-gulp-tasks": "^4.0.2",
-    "@tepez/typescript-common": "^0.2.0",
-    "@types/jasmine": "^2.8.16",
-    "gulp": "^3.9.1",
-    "np": "^4.0.2"
+    "@tepez/typescript-build-gulp-tasks": "^6.3.0",
+    "@tepez/typescript-common": "^0.2.2",
+    "@types/jasmine": "^3.6.2",
+    "gulp": "^4.0.2",
+    "np": "^7.0.0"
   },
   "dependencies": {
-    "@types/auth0": "^2.9.10"
+    "@types/auth0": "^2.20.11"
   },
   "peerDependencies": {
-    "@types/node": "^8.10.39"
+    "@types/node": "^14.14.14"
   }
 }

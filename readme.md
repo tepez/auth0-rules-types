@@ -3,8 +3,6 @@
 
 [![npm version](https://badge.fury.io/js/%40tepez%2Fauth0-rules-types.svg)](https://badge.fury.io/js/%40tepez%2Fauth0-rules-types)
 
-Compatible with the node8 runtime of auth0 ([current version](https://auth0-extensions.github.io/canirequire/) = v8.11.4)
-
 ## Install
 
 ```
